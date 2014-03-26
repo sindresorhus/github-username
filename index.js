@@ -2,7 +2,7 @@
 var request = require('request');
 
 module.exports = function (email, token, cb) {
-	if (typeof email !== 'string' && emai.indexOf('@') !== -1) {
+	if (typeof email !== 'string' && email.indexOf('@') !== -1) {
 		throw new Error('`email` required');
 	}
 
