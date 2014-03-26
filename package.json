@@ -1,0 +1,42 @@
+{
+  "name": "github-username",
+  "version": "0.0.0",
+  "description": "Get a GitHub username from an email address",
+  "license": "MIT",
+  "repository": "sindresorhus/github-username",
+  "bin": {
+    "github-username": "cli.js"
+  },
+  "author": {
+    "name": "Sindre Sorhus",
+    "email": "sindresorhus@gmail.com",
+    "url": "http://sindresorhus.com"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "files": [
+    "index.js",
+    "cli.js"
+  ],
+  "keywords": [
+    "cli",
+    "bin",
+    "app",
+    "github",
+    "user",
+    "username",
+    "email",
+    "gh",
+    "git"
+  ],
+  "dependencies": {
+    "request": "^2.34.0"
+  },
+  "devDependencies": {
+    "mocha": "*"
+  }
+}
