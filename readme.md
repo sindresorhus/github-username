@@ -7,7 +7,7 @@
 
 ## Install
 
-```bash
+```sh
 $ npm install --save github-username
 ```
 
@@ -46,27 +46,23 @@ GitHub [personal access token](https://github.com/settings/applications#personal
 
 ## CLI
 
-You can also use it as a CLI app by installing it globally:
-
-```bash
+```sh
 $ npm install --global github-username
 ```
 
-#### Usage
-
-```bash
+```sh
 $ github-username --help
 
-Usage
-  $ github-username <email> [--token OAUTH-TOKEN]
-  $ echo <email> | github-username
+  Usage
+    github-username <email> [--token OAUTH-TOKEN]
+    echo <email> | github-username
 
-Example
-  $ github-username sindresorhus@gmail.com
-  sindresorhus
+  Example
+    github-username sindresorhus@gmail.com
+    sindresorhus
 ```
 
 
 ## License
 
-[MIT](http://opensource.org/licenses/MIT) © [Sindre Sorhus](http://sindresorhus.com)
+MIT © [Sindre Sorhus](http://sindresorhus.com)

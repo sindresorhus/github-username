@@ -4,13 +4,13 @@
   "description": "Get a GitHub username from an email address",
   "license": "MIT",
   "repository": "sindresorhus/github-username",
-  "bin": {
-    "github-username": "cli.js"
-  },
   "author": {
     "name": "Sindre Sorhus",
     "email": "sindresorhus@gmail.com",
     "url": "http://sindresorhus.com"
+  },
+  "bin": {
+    "github-username": "cli.js"
   },
   "engines": {
     "node": ">=0.10.0"
@@ -34,7 +34,8 @@
     "git"
   ],
   "dependencies": {
-    "request": "^2.34.0"
+    "get-stdin": "^1.0.0",
+    "request": "^2.40.0"
   },
   "devDependencies": {
     "mocha": "*"

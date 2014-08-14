@@ -1,6 +1,6 @@
 'use strict';
 var assert = require('assert');
-var githubUsername = require('./index');
+var githubUsername = require('./');
 
 it('should get GitHub username from email', function (done) {
 	this.timeout(20000);

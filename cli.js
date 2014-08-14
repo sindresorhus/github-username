@@ -1,33 +1,32 @@
 #!/usr/bin/env node
 'use strict';
+var stdin = require('get-stdin');
 var pkg = require('./package.json');
-var githubUsername = require('./index');
-var input = process.argv[2];
-
-function stdin(cb) {
-	var ret = '';
-	process.stdin.setEncoding('utf8');
-	process.stdin.on('data', function (data) { ret += data });
-	process.stdin.on('end', function () { cb(ret) }).resume();
-}
+var githubUsername = require('./');
+var argv = process.argv.slice(2);
+var input = argv[0];
 
 function help() {
-	console.log(pkg.description);
-	console.log('');
-	console.log('Usage');
-	console.log('  $ github-username <email> [--token OAUTH-TOKEN]');
-	console.log('  $ echo <email> | github-username');
-	console.log('');
-	console.log('Example');
-	console.log('  $ github-username sindresorhus@gmail.com');
-	console.log('  sindresorhus');
+	console.log([
+		'',
+		'  ' + pkg.description,
+		'',
+		'  Usage',
+		'    github-username <email> [--token OAUTH-TOKEN]',
+		'    echo <email> | github-username',
+		'',
+		'  Example',
+		'    github-username sindresorhus@gmail.com',
+		'    sindresorhus'
+	].join('\n'));
 }
 
 function init(data) {
-	var token = process.argv.indexOf('--token');
+	var val;
+	var token = argv.indexOf('--token');
 
 	if (token !== -1) {
-		var val = process.argv[token + 1];
+		val = process.argv[token + 1];
 	}
 
 	githubUsername(data, val, function (err, username) {
@@ -40,12 +39,12 @@ function init(data) {
 	});
 }
 
-if (process.argv.indexOf('-h') !== -1 || process.argv.indexOf('--help') !== -1) {
+if (argv.indexOf('--help') !== -1) {
 	help();
 	return;
 }
 
-if (process.argv.indexOf('-v') !== -1 || process.argv.indexOf('--version') !== -1) {
+if (argv.indexOf('--version') !== -1) {
 	console.log(pkg.version);
 	return;
 }
