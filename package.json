@@ -23,6 +23,7 @@
     "cli.js"
   ],
   "keywords": [
+    "cli-app",
     "cli",
     "bin",
     "app",
@@ -35,7 +36,7 @@
   ],
   "dependencies": {
     "get-stdin": "^1.0.0",
-    "request": "^2.40.0"
+    "got": "^2.3.0"
   },
   "devDependencies": {
     "mocha": "*"

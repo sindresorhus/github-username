@@ -1,5 +1,6 @@
 'use strict';
-var request = require('request');
+var got = require('got');
+var querystring = require('querystring');
 
 module.exports = function (email, token, cb) {
 	if (typeof email !== 'string' && email.indexOf('@') !== -1) {
@@ -19,22 +20,25 @@ module.exports = function (email, token, cb) {
 		headers['Authorization'] = 'token ' + token;
 	}
 
-	request.get({
-		url: 'https://api.github.com/search/users',
-		json: true,
-		qs: {
-			q: email + ' in:email'
-		},
+	var qs = querystring.stringify({
+		q: email + ' in:email'
+	});
+
+	got.get('https://api.github.com/search/users?' + qs, {
 		headers: headers
-	}, function (err, res, body) {
-		if (err || res.statusCode !== 200) {
-			return cb(err || new Error('Status code: ' + res.statusCode));
+	}, function (err, data) {
+		if (err) {
+			cb(err);
+			return;
 		}
 
-		if (body.total_count === 0) {
-			return cb(new Error('Couldn\'t find a username for the supplied email'));
+		data = JSON.parse(data);
+
+		if (data.total_count === 0) {
+			cb(new Error('Couldn\'t find a username for the supplied email'));
+			return;
 		}
 
-		cb(null, body.items[0].login);
+		cb(null, data.items[0].login);
 	});
 };
