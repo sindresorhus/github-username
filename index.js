@@ -13,7 +13,7 @@ module.exports = function (email, token, cb) {
 	}
 
 	var headers = {
-		'User-Agent': 'https://github.com/sindresorhus/github-username'
+		'user-agent': 'https://github.com/sindresorhus/github-username'
 	};
 
 	if (token) {
