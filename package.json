@@ -7,7 +7,7 @@
   "author": {
     "name": "Sindre Sorhus",
     "email": "sindresorhus@gmail.com",
-    "url": "http://sindresorhus.com"
+    "url": "sindresorhus.com"
   },
   "bin": {
     "github-username": "cli.js"
@@ -35,8 +35,8 @@
     "git"
   ],
   "dependencies": {
-    "get-stdin": "^1.0.0",
-    "got": "^2.3.0"
+    "gh-got": "^1.0.3",
+    "meow": "^3.1.0"
   },
   "devDependencies": {
     "mocha": "*"

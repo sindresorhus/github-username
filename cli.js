@@ -1,61 +1,31 @@
 #!/usr/bin/env node
 'use strict';
-var stdin = require('get-stdin');
-var pkg = require('./package.json');
+var meow = require('meow');
 var githubUsername = require('./');
-var argv = process.argv.slice(2);
-var input = argv[0];
 
-function help() {
-	console.log([
+var cli = meow({
+	help: [
+		'Usage',
+		'  $ github-username <email> [--token=<token>]',
 		'',
-		'  ' + pkg.description,
-		'',
-		'  Usage',
-		'    github-username <email> [--token OAUTH-TOKEN]',
-		'    echo <email> | github-username',
-		'',
-		'  Example',
-		'    github-username sindresorhus@gmail.com',
-		'    sindresorhus'
-	].join('\n'));
+		'Example',
+		'  $ github-username sindresorhus@gmail.com',
+		'  sindresorhus'
+	].join('\n')
+});
+
+var email = cli.input[0];
+
+if (!email) {
+	console.error('Please supply an email');
+	process.exit(1);
 }
 
-function init(data) {
-	var val;
-	var token = argv.indexOf('--token');
-
-	if (token !== -1) {
-		val = process.argv[token + 1];
+githubUsername(cli.input[0], cli.flags.token, function (err, username) {
+	if (err) {
+		console.error(err);
+		process.exit(1);
 	}
 
-	githubUsername(data, val, function (err, username) {
-		if (err) {
-			console.error(err);
-			process.exit(1);
-		}
-
-		console.log(username);
-	});
-}
-
-if (argv.indexOf('--help') !== -1) {
-	help();
-	return;
-}
-
-if (argv.indexOf('--version') !== -1) {
-	console.log(pkg.version);
-	return;
-}
-
-if (process.stdin.isTTY) {
-	if (!input) {
-		help();
-		return;
-	}
-
-	init(input);
-} else {
-	stdin(init);
-}
+	console.log(username);
+});
