@@ -11,7 +11,7 @@ var cli = meow({
 		'Example',
 		'  $ github-username sindresorhus@gmail.com',
 		'  sindresorhus'
-	].join('\n')
+	]
 });
 
 var email = cli.input[0];
@@ -21,7 +21,7 @@ if (!email) {
 	process.exit(1);
 }
 
-githubUsername(cli.input[0], cli.flags.token, function (err, username) {
+githubUsername(email, cli.flags.token, function (err, username) {
 	if (err) {
 		console.error(err);
 		process.exit(1);
