@@ -3,21 +3,19 @@
 var meow = require('meow');
 var githubUsername = require('./');
 
-var cli = meow({
-	help: [
-		'Usage',
-		'  $ github-username <email> [--token=<token>]',
-		'',
-		'Example',
-		'  $ github-username sindresorhus@gmail.com',
-		'  sindresorhus'
-	]
-});
+var cli = meow([
+	'Usage',
+	'  $ github-username <email> [--token=<token>]',
+	'',
+	'Example',
+	'  $ github-username sindresorhus@gmail.com',
+	'  sindresorhus'
+]);
 
 var email = cli.input[0];
 
 if (!email) {
-	console.error('Please supply an email');
+	console.error('Please specify an email');
 	process.exit(1);
 }
 
