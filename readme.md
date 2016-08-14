@@ -26,7 +26,7 @@ githubUsername('sindresorhus@gmail.com', function (err, username) {
 
 ## API
 
-### githubUsername(email, [token], callback)
+### githubUsername(email, [token], [callback]): Promise<username>
 
 #### email
 
