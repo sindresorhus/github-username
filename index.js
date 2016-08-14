@@ -11,7 +11,7 @@ module.exports = function (email, token, cb) {
 		token = null;
 	}
 
-	ghGot('search/users', {
+	return ghGot('search/users', {
 		token: token,
 		query: {
 			q: email + ' in:email'
@@ -23,10 +23,18 @@ module.exports = function (email, token, cb) {
 		var data = result.body;
 
 		if (data.total_count === 0) {
-			cb(new Error('Couldn\'t find a username for the supplied email'));
+			var error = new Error('Couldn\'t find a username for the supplied email');
+			if (cb) {
+				cb(error);
+			} else {
+				throw error;
+			}
 			return;
 		}
 
-		cb(null, data.items[0].login);
+		if (cb) {
+			cb(null, data.items[0].login);
+		}
+		return data.items[0].login;
 	}).catch(cb);
 };
