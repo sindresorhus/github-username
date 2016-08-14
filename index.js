@@ -1,14 +1,9 @@
 'use strict';
 var ghGot = require('gh-got');
 
-module.exports = function (email, token, cb) {
+module.exports = function (email, token) {
 	if (typeof email !== 'string' || email.indexOf('@') === -1) {
 		throw new Error('`email` required');
-	}
-
-	if (typeof token === 'function') {
-		cb = token;
-		token = null;
 	}
 
 	return ghGot('search/users', {
@@ -23,18 +18,9 @@ module.exports = function (email, token, cb) {
 		var data = result.body;
 
 		if (data.total_count === 0) {
-			var error = new Error('Couldn\'t find a username for the supplied email');
-			if (cb) {
-				cb(error);
-			} else {
-				throw error;
-			}
-			return;
+			throw new Error('Couldn\'t find a username for the supplied email');
 		}
 
-		if (cb) {
-			cb(null, data.items[0].login);
-		}
 		return data.items[0].login;
-	}).catch(cb);
+	});
 };
