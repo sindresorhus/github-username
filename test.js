@@ -1,24 +1,10 @@
-/* eslint-env mocha */
-'use strict';
-var assert = require('assert');
-var githubUsername = require('./');
+import test from 'ava';
+import m from './';
 
-it('should get GitHub username from email and return a promise', function () {
-	this.timeout(20000);
-
-	return githubUsername('sindresorhus@gmail.com').then(function (username) {
-		assert.equal(username, 'sindresorhus');
-	});
+test('gets GitHub username from email', async t => {
+	t.is(await m('sindresorhus@gmail.com'), 'sindresorhus');
 });
 
-it('should fail when github has no user for the email', function () {
-	this.timeout(20000);
-
-	return githubUsername('nogithubaccount@example.com')
-		.then(function () {
-			assert.ok(false);
-		})
-		.catch(function (err) {
-			assert.equal(err.message, 'Couldn\'t find a username for the supplied email');
-		});
+test('rejects when GitHub has no user for the email', async t => {
+	await t.throws(m('nogithubaccount@example.com'));
 });

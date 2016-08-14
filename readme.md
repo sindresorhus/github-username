@@ -15,9 +15,9 @@ $ npm install --save github-username
 ## Usage
 
 ```js
-var githubUsername = require('github-username');
+const githubUsername = require('github-username');
 
-githubUsername('sindresorhus@gmail.com', function (err, username) {
+githubUsername('sindresorhus@gmail.com').then(username => {
 	console.log(username);
 	//=> 'sindresorhus'
 });
@@ -28,11 +28,10 @@ githubUsername('sindresorhus@gmail.com', function (err, username) {
 
 ### githubUsername(email, [token])
 
-Returns a Promise for the username.
+Returns a `Promise` for the username.
 
 #### email
 
-*Required*  
 Type: `string`
 
 Email address for the user of whom you want the username.
@@ -44,25 +43,11 @@ Type: `string`
 GitHub [personal access token](https://github.com/settings/tokens/new).
 
 
-## CLI
+## Related
 
-```
-$ npm install --global github-username
-```
-
-```
-$ github-username --help
-
-  Usage
-    github-username <email> [--token OAUTH-TOKEN]
-    echo <email> | github-username
-
-  Example
-    github-username sindresorhus@gmail.com
-    sindresorhus
-```
+- [github-username-cli](https://github.com/sindresorhus/github-username-cli) - CLI for this module
 
 
 ## License
 
-MIT © [Sindre Sorhus](http://sindresorhus.com)
+MIT © [Sindre Sorhus](https://sindresorhus.com)

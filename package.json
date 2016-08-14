@@ -9,35 +9,32 @@
     "email": "sindresorhus@gmail.com",
     "url": "sindresorhus.com"
   },
-  "bin": "cli.js",
   "engines": {
-    "node": ">=0.10.0"
+    "node": ">=4"
   },
   "scripts": {
-    "test": "xo && mocha"
+    "test": "xo && ava"
   },
   "files": [
-    "index.js",
-    "cli.js"
+    "index.js"
   ],
   "keywords": [
-    "cli-app",
-    "cli",
-    "bin",
-    "app",
     "github",
     "user",
     "username",
     "email",
+    "address",
     "gh",
     "git"
   ],
   "dependencies": {
-    "gh-got": "^2.2.0",
-    "meow": "^3.5.0"
+    "gh-got": "^5.0.0"
   },
   "devDependencies": {
-    "mocha": "*",
+    "ava": "*",
     "xo": "*"
+  },
+  "xo": {
+    "esnext": true
   }
 }

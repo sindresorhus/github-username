@@ -1,24 +1,24 @@
 'use strict';
-var ghGot = require('gh-got');
+const ghGot = require('gh-got');
 
-module.exports = function (email, token) {
-	if (typeof email !== 'string' || email.indexOf('@') === -1) {
-		throw new Error('`email` required');
+module.exports = (email, token) => {
+	if (!(typeof email === 'string' && email.includes('@'))) {
+		throw new Error('Email required');
 	}
 
 	return ghGot('search/users', {
-		token: token,
+		token,
 		query: {
-			q: email + ' in:email'
+			q: `${email} in:email`
 		},
 		headers: {
 			'user-agent': 'https://github.com/sindresorhus/github-username'
 		}
-	}).then(function (result) {
-		var data = result.body;
+	}).then(result => {
+		const data = result.body;
 
 		if (data.total_count === 0) {
-			throw new Error('Couldn\'t find a username for the supplied email');
+			throw new Error(`Couldn't find username for \`${email}\``);
 		}
 
 		return data.items[0].login;
