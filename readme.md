@@ -26,7 +26,9 @@ githubUsername('sindresorhus@gmail.com', function (err, username) {
 
 ## API
 
-### githubUsername(email, [token], callback)
+### githubUsername(email, [token])
+
+Returns a Promise for the username.
 
 #### email
 
@@ -40,8 +42,6 @@ Email address for the user of whom you want the username.
 Type: `string`  
 
 GitHub [personal access token](https://github.com/settings/tokens/new).
-
-#### callback(err, username)
 
 
 ## CLI
