@@ -37,12 +37,7 @@ module.exports = (email, token) => {
 					throw new Error(`Couldn't find username for \`${email}\``);
 				}
 
-				return ghGot(`user/${data.items[0].author_id}`, {
-					token
-				});
-			}).then(result => {
-				const data = result.body;
-				return data.login;
+				return data.items[0].author.login;
 			});
 		}
 
