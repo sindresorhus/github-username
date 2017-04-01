@@ -1,6 +1,6 @@
 {
   "name": "github-username",
-  "version": "3.0.0",
+  "version": "4.0.0",
   "description": "Get a GitHub username from an email address",
   "license": "MIT",
   "repository": "sindresorhus/github-username",
