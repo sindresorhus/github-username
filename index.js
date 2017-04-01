@@ -3,7 +3,7 @@ const ghGot = require('gh-got');
 
 module.exports = (email, token) => {
 	if (!(typeof email === 'string' && email.includes('@'))) {
-		throw new Error('Email required');
+		return Promise.reject(new Error('Email required'));
 	}
 
 	return ghGot('search/users', {
