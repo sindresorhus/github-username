@@ -28,7 +28,7 @@
     "git"
   ],
   "dependencies": {
-    "gh-got": "^5.0.0"
+    "gh-got": "^6.0.0"
   },
   "devDependencies": {
     "ava": "*",
