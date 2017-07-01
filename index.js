@@ -1,30 +1,6 @@
 'use strict';
 const ghGot = require('gh-got');
 
-module.exports = (email, token) => {
-	if (!(typeof email === 'string' && email.includes('@'))) {
-		return Promise.reject(new Error('Email required'));
-	}
-
-	return ghGot('search/users', {
-		token,
-		query: {
-			q: `${email} in:email`
-		},
-		headers: {
-			'user-agent': 'https://github.com/sindresorhus/github-username'
-		}
-	}).then(result => {
-		const data = result.body;
-
-		if (data.total_count === 0) {
-			return searchCommits(email, token);
-		}
-
-		return data.items[0].login;
-	});
-};
-
 function searchCommits(email, token) {
 	return ghGot('search/commits', {
 		token,
@@ -48,3 +24,27 @@ function searchCommits(email, token) {
 		return data.items[0].author.login;
 	});
 }
+
+module.exports = (email, token) => {
+	if (!(typeof email === 'string' && email.includes('@'))) {
+		return Promise.reject(new Error('Email required'));
+	}
+
+	return ghGot('search/users', {
+		token,
+		query: {
+			q: `${email} in:email`
+		},
+		headers: {
+			'user-agent': 'https://github.com/sindresorhus/github-username'
+		}
+	}).then(result => {
+		const data = result.body;
+
+		if (data.total_count === 0) {
+			return searchCommits(email, token);
+		}
+
+		return data.items[0].login;
+	});
+};
