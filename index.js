@@ -26,10 +26,12 @@ function searchCommits(email, token, options) {
 	});
 }
 
-module.exports = (email, token, options = {}) => {
+module.exports = (email, token, options) => {
 	if (!(typeof email === 'string' && email.includes('@'))) {
 		return Promise.reject(new Error('Email required'));
 	}
+
+	options = options || {};
 
 	Object.assign(options, {
 		token,
