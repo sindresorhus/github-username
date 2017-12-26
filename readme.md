@@ -24,7 +24,7 @@ githubUsername('sindresorhus@gmail.com').then(username => {
 
 ## API
 
-### githubUsername(email, [token])
+### githubUsername(email, [token], [options])
 
 Returns a `Promise` for the username.
 
@@ -39,6 +39,12 @@ Email address for the user of whom you want the username.
 Type: `string`
 
 GitHub [personal access token](https://github.com/settings/tokens/new).
+
+#### options
+
+Type: `object`
+
+Additional [`http-request` options](https://nodejs.org/api/http.html#http_http_request_options_callback) to use.
 
 
 ## Related
