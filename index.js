@@ -1,8 +1,8 @@
 'use strict';
 const ghGot = require('gh-got');
 
-function searchCommits(email, token) {
-	return ghGot('search/commits', {
+function searchCommits(email, token, options) {
+	Object.assign(options, {
 		token,
 		query: {
 			q: `author-email:${email}`,
@@ -14,7 +14,8 @@ function searchCommits(email, token) {
 			accept: 'application/vnd.github.cloak-preview',
 			'user-agent': 'https://github.com/sindresorhus/github-username'
 		}
-	}).then(result => {
+	});
+	return ghGot('search/commits', options).then(result => {
 		const data = result.body;
 
 		if (data.total_count === 0) {
@@ -25,12 +26,14 @@ function searchCommits(email, token) {
 	});
 }
 
-module.exports = (email, token) => {
+module.exports = (email, token, options) => {
 	if (!(typeof email === 'string' && email.includes('@'))) {
 		return Promise.reject(new Error('Email required'));
 	}
 
-	return ghGot('search/users', {
+	options = options || {};
+
+	Object.assign(options, {
 		token,
 		query: {
 			q: `${email} in:email`
@@ -38,11 +41,13 @@ module.exports = (email, token) => {
 		headers: {
 			'user-agent': 'https://github.com/sindresorhus/github-username'
 		}
-	}).then(result => {
+	});
+
+	return ghGot('search/users', options).then(result => {
 		const data = result.body;
 
 		if (data.total_count === 0) {
-			return searchCommits(email, token);
+			return searchCommits(email, token, options);
 		}
 
 		return data.items[0].login;
