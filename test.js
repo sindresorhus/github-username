@@ -1,26 +1,26 @@
 import test from 'ava';
-import m from './';
+import githubUsername from '.';
 
 test('gets GitHub username from email', async t => {
-	t.is(await m('sindresorhus@gmail.com'), 'sindresorhus');
+	t.is(await githubUsername('sindresorhus@gmail.com'), 'sindresorhus');
 });
 
 test('gets GitHub username from email using Commit Search API', async t => {
-	t.is(await m('markdotto@gmail.com'), 'mdo');
+	t.is(await githubUsername('markdotto@gmail.com'), 'mdo');
 });
 
 test('rejects when GitHub has no user for the email', async t => {
-	await t.throws(m('nogithubaccount@example.com'));
+	await t.throwsAsync(githubUsername('nogithubaccount@example.com'));
 });
 
 test('rejects when email is missing', async t => {
-	await t.throws(m());
+	await t.throwsAsync(githubUsername());
 });
 
 test('rejects when email is invalid', async t => {
-	await t.throws(m('sindresorhus_gmail.com'));
+	await t.throwsAsync(githubUsername('sindresorhus_gmail.com'));
 });
 
 test('rejects when email is not a string', async t => {
-	await t.throws(m(() => 'sindresorhus_gmail.com'));
+	await t.throwsAsync(githubUsername(() => 'sindresorhus_gmail.com'));
 });

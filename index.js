@@ -1,8 +1,8 @@
 'use strict';
 const ghGot = require('gh-got');
 
-function searchCommits(email, token) {
-	return ghGot('search/commits', {
+async function searchCommits(email, token) {
+	const result = await ghGot('search/commits', {
 		token,
 		query: {
 			q: `author-email:${email}`,
@@ -14,23 +14,23 @@ function searchCommits(email, token) {
 			accept: 'application/vnd.github.cloak-preview',
 			'user-agent': 'https://github.com/sindresorhus/github-username'
 		}
-	}).then(result => {
-		const data = result.body;
-
-		if (data.total_count === 0) {
-			throw new Error(`Couldn't find username for \`${email}\``);
-		}
-
-		return data.items[0].author.login;
 	});
-}
 
-module.exports = (email, token) => {
-	if (!(typeof email === 'string' && email.includes('@'))) {
-		return Promise.reject(new Error('Email required'));
+	const {body: data} = result;
+
+	if (data.total_count === 0) {
+		throw new Error(`Couldn't find username for \`${email}\``);
 	}
 
-	return ghGot('search/users', {
+	return data.items[0].author.login;
+}
+
+module.exports = async (email, token) => {
+	if (!(typeof email === 'string' && email.includes('@'))) {
+		throw new Error('Email required');
+	}
+
+	const result = await ghGot('search/users', {
 		token,
 		query: {
 			q: `${email} in:email`
@@ -38,13 +38,13 @@ module.exports = (email, token) => {
 		headers: {
 			'user-agent': 'https://github.com/sindresorhus/github-username'
 		}
-	}).then(result => {
-		const data = result.body;
-
-		if (data.total_count === 0) {
-			return searchCommits(email, token);
-		}
-
-		return data.items[0].login;
 	});
+
+	const {body: data} = result;
+
+	if (data.total_count === 0) {
+		return searchCommits(email, token);
+	}
+
+	return data.items[0].login;
 };

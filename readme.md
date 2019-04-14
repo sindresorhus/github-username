@@ -15,10 +15,10 @@ $ npm install github-username
 ```js
 const githubUsername = require('github-username');
 
-githubUsername('sindresorhus@gmail.com').then(username => {
-	console.log(username);
+(async () => {
+	console.log(await githubUsername('sindresorhus@gmail.com'));
 	//=> 'sindresorhus'
-});
+})();
 ```
 
 
