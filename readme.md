@@ -26,7 +26,7 @@ const githubUsername = require('github-username');
 
 ### githubUsername(email, [token])
 
-Returns a `Promise` for the username.
+Returns a `Promise<string>` with the username.
 
 #### email
 
