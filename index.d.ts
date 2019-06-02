@@ -15,6 +15,6 @@ import githubUsername = require('github-username');
 })();
 ```
 */
-declare function githubUsername(email: string, token: string): Promise<string>;
+declare function githubUsername(email: string, token?: string): Promise<string>;
 
 export = githubUsername;
