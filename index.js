@@ -1,22 +1,16 @@
 'use strict';
-const ghGot = require('gh-got');
+const {Octokit} = require('@octokit/rest');
 
-async function searchCommits(email, token) {
-	const result = await ghGot('search/commits', {
-		token,
-		query: {
-			q: `author-email:${email}`,
-			sort: 'author-date',
-			// eslint-disable-next-line camelcase
-			per_page: 1
-		},
+async function searchCommits(octokit, email) {
+	const {data} = await octokit.search.commits({
+		q: `author-email:${email}`,
+		sort: 'author-date',
+		// eslint-disable-next-line camelcase
+		per_page: 1,
 		headers: {
-			accept: 'application/vnd.github.cloak-preview',
-			'user-agent': 'https://github.com/sindresorhus/github-username'
+			accept: 'application/vnd.github.cloak-preview'
 		}
 	});
-
-	const {body: data} = result;
 
 	if (data.total_count === 0) {
 		throw new Error(`Couldn't find username for \`${email}\``);
@@ -30,20 +24,17 @@ module.exports = async (email, token) => {
 		throw new Error('Email required');
 	}
 
-	const result = await ghGot('search/users', {
-		token,
-		query: {
-			q: `${email} in:email`
-		},
-		headers: {
-			'user-agent': 'https://github.com/sindresorhus/github-username'
-		}
+	const octokit = new Octokit({
+		auth: token,
+		userAgent: 'https://github.com/sindresorhus/github-username'
 	});
 
-	const {body: data} = result;
+	const {data} = await octokit.search.users({
+		q: `${email} in:email`
+	});
 
 	if (data.total_count === 0) {
-		return searchCommits(email, token);
+		return searchCommits(octokit, email);
 	}
 
 	return data.items[0].login;
