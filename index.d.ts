@@ -1,9 +1,9 @@
 /**
-Get a GitHub username from an email address.
+Get the GitHub username from an email address if the email can be found in any commits on GitHub.
 
 @param email - Email address for the user of whom you want the username.
 @param token - GitHub [personal access token](https://github.com/settings/tokens/new).
-@returns The username for the `email`.
+@returns The username for the `email` or `undefined` if it cannot be found.
 
 @example
 ```
@@ -15,6 +15,6 @@ import githubUsername = require('github-username');
 })();
 ```
 */
-declare function githubUsername(email: string, token?: string): Promise<string>;
+declare function githubUsername(email: string, token?: string): Promise<string | undefined>;
 
 export = githubUsername;
