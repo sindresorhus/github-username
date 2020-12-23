@@ -7,9 +7,7 @@ async function searchCommits(octokit, email) {
 		sort: 'author-date',
 		// eslint-disable-next-line camelcase
 		per_page: 1,
-		headers: {
-			accept: 'application/vnd.github.cloak-preview'
-		}
+		userAgent: 'https://github.com/sindresorhus/github-username'
 	});
 
 	if (data.total_count === 0) {
