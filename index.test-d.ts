@@ -1,6 +1,6 @@
 import {expectType} from 'tsd';
-import githubUsername = require('.');
+import githubUsername from './index.js';
 
 expectType<Promise<string | undefined>>(
-	githubUsername('sindresorhus@gmail.com', 'deadbeef')
+	githubUsername('sindresorhus@gmail.com', {token: 'deadbeef'}),
 );

@@ -4,24 +4,22 @@
 
 ## Install
 
-```
-$ npm install github-username
+```sh
+npm install github-username
 ```
 
 ## Usage
 
 ```js
-const githubUsername = require('github-username');
+import githubUsername from 'github-username';
 
-(async () => {
-	console.log(await githubUsername('sindresorhus@gmail.com'));
-	//=> 'sindresorhus'
-})();
+console.log(await githubUsername('sindresorhus@gmail.com'));
+//=> 'sindresorhus'
 ```
 
 ## API
 
-### githubUsername(email, token?)
+### githubUsername(email, options?)
 
 Get the GitHub username from an email address if the email can be found in any commits on GitHub.
 
@@ -31,9 +29,13 @@ Returns a `Promise<string?>` with the username.
 
 Type: `string`
 
-Email address for the user of whom you want the username.
+The email address for the user of whom you want the username.
 
-#### token
+#### options
+
+Type: `object`
+
+##### token
 
 Type: `string`
 

@@ -1,5 +1,5 @@
 import test from 'ava';
-import githubUsername from '.';
+import githubUsername from './index.js';
 
 test('gets GitHub username from email', async t => {
 	t.is(await githubUsername('sindresorhus@gmail.com'), 'sindresorhus');
