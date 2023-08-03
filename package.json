@@ -1,6 +1,6 @@
 {
 	"name": "github-username",
-	"version": "7.0.0",
+	"version": "8.0.0",
 	"description": "Get a GitHub username from an email address",
 	"license": "MIT",
 	"repository": "sindresorhus/github-username",
@@ -13,7 +13,7 @@
 	"type": "module",
 	"exports": "./index.js",
 	"engines": {
-		"node": "^12.20.0 || ^14.13.1 || >=16.0.0"
+		"node": ">=18.0.0"
 	},
 	"scripts": {
 		"test": "xo && ava && tsd"
@@ -32,11 +32,11 @@
 		"git"
 	],
 	"dependencies": {
-		"@octokit/rest": "^18.12.0"
+		"@octokit/rest": "^20.0.1"
 	},
 	"devDependencies": {
-		"ava": "^3.15.0",
-		"tsd": "^0.18.0",
-		"xo": "^0.45.0"
+		"ava": "^5.3.1",
+		"tsd": "^0.28.1",
+		"xo": "^0.55.0"
 	}
 }
