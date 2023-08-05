@@ -1,9 +1,9 @@
-export interface Options {
+export type Options = {
 	/**
 	GitHub [personal access token](https://github.com/settings/tokens/new).
 	*/
 	readonly token?: string;
-}
+};
 
 /**
 Get the GitHub username from an email address if the email can be found in any commits on GitHub.
