@@ -16,7 +16,7 @@
 		"default": "./index.js"
 	},
 	"engines": {
-		"node": ">=16"
+		"node": ">=18"
 	},
 	"scripts": {
 		"test": "xo && ava && tsd"
@@ -35,11 +35,11 @@
 		"git"
 	],
 	"dependencies": {
-		"@octokit/rest": "^19.0.13"
+		"@octokit/rest": "^21.1.1"
 	},
 	"devDependencies": {
-		"ava": "^5.3.1",
-		"tsd": "^0.28.1",
-		"xo": "^0.55.0"
+		"ava": "^6.2.0",
+		"tsd": "^0.31.2",
+		"xo": "^0.60.0"
 	}
 }
